@@ -43,6 +43,7 @@ Loading data into MySQL before transformation:
 The MySQL database serves as the authoritative source for downstream transformations and analytics.
 
 <img width="193" height="202" alt="image" src="https://github.com/user-attachments/assets/3a251a82-ab93-46fb-b6f0-c85662d57ffb" />
+
 Shown above is the database as it appears in the left sidebar of MySQL Workbench.
 
 
