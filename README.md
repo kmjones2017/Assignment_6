@@ -23,7 +23,7 @@ Analytics Outputs (CSV Reports)
 * **MySQL** – relational data storage
 * **Python** – transformation and analytics logic
 * **pandas** – data manipulation and aggregation
-* **Prefect (planned integration)** – orchestration and monitoring
+* **Prefect** – orchestration and monitoring
 
 ---
 
@@ -80,6 +80,7 @@ Analytics are performed in `analytics.py` using pandas.
 3. **Customer Segmentation**
 
    * High / Medium / Low spenders based on total order value
+   * Based on the provided dataset, all customers fell below the medium-spend threshold. In a real production system, thresholds would be calibrated dynamically or based on historical percentiles.
 
 ### Validation & Sanity Checks
 
