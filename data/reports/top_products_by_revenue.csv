@@ -1,4 +1,4 @@
-drug_id,drug_name,total_quantity,total_revenue
+drug_id,drug_name,quantity_sold,total_revenue
 1,PainRelief Plus,1500,14985.0
 3,IbuFast,1000,11990.0
 4,ColdEase,350,5075.0
