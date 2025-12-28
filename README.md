@@ -4,6 +4,20 @@ This project implements an end-to-end **ETL (Extract, Transform, Load)** pipelin
 
 ---
 
+## Installation Instructions (WIP)
+   Include all steps required to install and set up the project (including dependencies, environment setup)
+   - Python version
+
+   - Required libraries (pandas, mysql-connector-python, prefect, python-dotenv)
+
+   - MySQL setup
+
+   - .env file instructions
+
+   - Optional Prefect setup
+
+---
+
 ## Architecture Overview
 
 **Data Flow Summary**
@@ -27,6 +41,31 @@ Analytics Outputs (CSV Reports)
 
 ---
 
+## Running the System (WIP)
+   Provide clear instructions on how to execute the Prefect flow and where to view the results.
+   This section should explain:
+
+   - How to run the SQL schema/load scripts
+
+   - How to run the Prefect flow (or placeholder if still WIP)
+
+   - How to run transformation and analytics scripts
+
+   - Where outputs appear
+
+---
+
+## Tasks and Dependencies (WIP)
+This section explains:
+
+   - what each task does
+
+   - how tasks depend on each other
+
+   - how Prefect coordinates them
+
+---
+
 ## Upstream Ingestion & Load
 
 Raw CSV files are ingested into a MySQL database using SQL-based loading mechanisms (e.g., `LOAD DATA INFILE`). This step establishes a normalized relational schema representing customers, suppliers, orders, products, batches, raw materials and formulations.
@@ -46,6 +85,17 @@ The MySQL database serves as the authoritative source for downstream transformat
 
 Shown above is the database as it appears in the left sidebar of MySQL Workbench.
 
+---
+
+## SQL Queries (WIP)
+
+_All files are located in the db folder of the repository._
+
+* **pharma_script.sql** - creates the database and tables...
+* **pharma_schema_validation.sql** -  checks that all tables are present in the database, the table row counts match the CSVs, and displays the structure of each table
+* **pharmadb_join_validation.sql** - checks for foreign key violations and includes aggregation queries to explain any missing joins
+* **sample_queries.sql** - ...
+* A description of Kevin's aggregation file(s)
 
 ---
 
