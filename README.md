@@ -95,7 +95,7 @@ If any validation fails, execution stops immediately.
 
 ### Outputs
 
-Analytics results are exported as CSV files:
+Analytics results are exported as CSV files located inside the data folder's reports folder:
 
 * `revenue_by_product.csv`
 * `top_products_by_quantity.csv`
@@ -126,7 +126,7 @@ When integrated into Prefect, failed assertions will cause task and flow failure
 
 ---
 
-## Orchestration (Prefect – In Progress)
+## Orchestration (Prefect)
 
 The pipeline is designed for orchestration using Prefect. Once integrated:
 
