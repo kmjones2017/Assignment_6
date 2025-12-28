@@ -43,6 +43,7 @@ Loading data into MySQL before transformation:
 The MySQL database serves as the authoritative source for downstream transformations and analytics.
 
 <img width="193" height="202" alt="image" src="https://github.com/user-attachments/assets/3a251a82-ab93-46fb-b6f0-c85662d57ffb" />
+Shown above is the database as it appears in the left sidebar of MySQL Workbench.
 
 
 ---
@@ -84,6 +85,8 @@ Analytics are performed in `analytics.py` using pandas.
 
    * High / Medium / Low spenders based on total order value
    * Based on the provided dataset, all customers fell below the medium-spend threshold. In a real production system, thresholds would be calibrated dynamically or based on historical percentiles.
+
+The output of the script is shown below.
 <img width="807" height="793" alt="image" src="https://github.com/user-attachments/assets/732153a0-22d7-4705-8bb1-7aa229db13c4" />
 
 (The warning is simply recommending the use of SQLAlchemy because it is officially supported by pandas.)
