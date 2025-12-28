@@ -138,7 +138,8 @@ Analytics are performed in `analytics.py` using pandas.
    * Based on the provided dataset, all customers fell below the medium-spend threshold. In a real production system, thresholds would be calibrated dynamically or based on historical percentiles.
 
 The output of the script is shown below.
-<img width="807" height="793" alt="image" src="https://github.com/user-attachments/assets/732153a0-22d7-4705-8bb1-7aa229db13c4" />
+<img width="813" height="720" alt="image" src="https://github.com/user-attachments/assets/2f7412eb-a41a-42b7-98b8-7b06714f80c6" />
+
 
 (The warning is simply recommending the use of SQLAlchemy because it is officially supported by pandas.)
 
