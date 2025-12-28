@@ -1,65 +1,34 @@
 # tasks/ingestion.py
-# create .env file (example available in the repo root folder)
-# pip install python-dotenv
 
 from prefect import task
 import pandas as pd
-import mysql.connector
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-db_config = {
-    "host": os.getenv("DB_HOST"),
-    "user": os.getenv("DB_USER"),
-    "password": os.getenv("DB_PASSWORD"),
-    "database": os.getenv("DB_NAME")
-}
 
 @task
-def ingest_csv_to_mysql(file_path: str, table: str):
+def ingest_csv(file_path: str, expected_columns: list[str]):
     """
-    Ingests a CSV into a MySQL table, validates schema, logs row counts, 
-    and handles missing/extra columns gracefully.
+    Reads a CSV file, validates schema shape, logs row counts,
+    and returns a cleaned pandas DataFrame.
     """
-    # Load CSV
     df = pd.read_csv(file_path)
+
     row_count = len(df)
-    print(f"Loaded {row_count} rows from {file_path}")
+    print(f"[INGESTION] Loaded {row_count} rows from {file_path}")
 
-    # Connect to MySQL
-    connection = mysql.connector.connect(**db_config)
-    cursor = connection.cursor()
-
-    # Get DB columns
-    cursor.execute(f"DESCRIBE {table}")
-    db_columns = [row[0] for row in cursor.fetchall()]
-
-    # Check for missing and extra columns
-    missing_cols = set(db_columns) - set(df.columns)
-    extra_cols = set(df.columns) - set(db_columns)
+    # Validate missing / extra columns
+    missing_cols = set(expected_columns) - set(df.columns)
+    extra_cols = set(df.columns) - set(expected_columns)
 
     if missing_cols:
-        raise ValueError(f"Missing required columns for table '{table}': {missing_cols}")
-    
+        raise ValueError(
+            f"[INGESTION ERROR] Missing required columns: {missing_cols}"
+        )
+
     if extra_cols:
-        print(f"Warning: Extra columns in CSV ignored: {extra_cols}")
-        # Keep only columns that exist in DB
-        df = df[[col for col in df.columns if col in db_columns]]
+        print(
+            f"[INGESTION WARNING] Extra columns ignored: {extra_cols}"
+        )
+        df = df[list(expected_columns)]
 
-    # Prepare insert statement
-    cols = ",".join(df.columns)
-    placeholders = ",".join(["%s"] * len(df.columns))
-    sql = f"INSERT INTO {table} ({cols}) VALUES ({placeholders})"
+    print(f"[INGESTION] Schema validated for {file_path}")
 
-    # Insert rows
-    for _, row in df.iterrows():
-        cursor.execute(sql, tuple(row))
-
-    connection.commit()
-    cursor.close()
-    connection.close()
-
-    print(f"Inserted {row_count} rows into {table}")
-    return row_count
+    return df
