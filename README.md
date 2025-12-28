@@ -29,7 +29,7 @@ Analytics Outputs (CSV Reports)
 
 ## Upstream Ingestion & Load
 
-Raw CSV files are ingested into a MySQL database using SQL-based loading mechanisms (e.g., `LOAD DATA INFILE`). This step establishes a normalized relational schema representing customers, orders, products, batches, and formulations.
+Raw CSV files are ingested into a MySQL database using SQL-based loading mechanisms (e.g., `LOAD DATA INFILE`). This step establishes a normalized relational schema representing customers, suppliers, orders, products, batches, raw materials and formulations.
 
 ### Why Load into MySQL First?
 
