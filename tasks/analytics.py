@@ -2,7 +2,7 @@
 
 import os
 import pandas as pd
-from transformation_v2 import build_orders_fact
+from transformation import build_orders_fact
 
 # -------------------------
 # Load transformed data
