@@ -41,6 +41,8 @@ Loading data into MySQL before transformation:
 * Reflects real-world data engineering workflows where analytics consume curated operational data rather than raw files
 
 The MySQL database serves as the authoritative source for downstream transformations and analytics.
+<img width="193" height="202" alt="image" src="https://github.com/user-attachments/assets/3a251a82-ab93-46fb-b6f0-c85662d57ffb" />
+
 
 ---
 
@@ -81,6 +83,8 @@ Analytics are performed in `analytics.py` using pandas.
 
    * High / Medium / Low spenders based on total order value
    * Based on the provided dataset, all customers fell below the medium-spend threshold. In a real production system, thresholds would be calibrated dynamically or based on historical percentiles.
+<img width="807" height="793" alt="image" src="https://github.com/user-attachments/assets/732153a0-22d7-4705-8bb1-7aa229db13c4" />
+(The warning is simply recommending the use of SQLAlchemy because it is officially supported by pandas.)
 
 ### Validation & Sanity Checks
 
@@ -95,7 +99,7 @@ If any validation fails, execution stops immediately.
 
 ### Outputs
 
-Analytics results are exported as CSV files located inside the data folder's reports folder:
+Analytics results are exported as CSV files located inside the repository under data/reports:
 
 * `revenue_by_product.csv`
 * `top_products_by_quantity.csv`
