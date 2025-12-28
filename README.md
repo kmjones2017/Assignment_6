@@ -1,6 +1,6 @@
 ## Pharmaceutical Manufacturing ETL Pipeline
 
-This project implements an end-to-end **ETL (Extract, Transform, Load)** pipeline for a pharmaceutical manufacturing dataset. The pipeline ingests raw operational data into a relational MySQL database, performs transformations using Python and pandas, and produces analytics-ready outputs with validation and integrity checks.
+This project implements an end-to-end **ETL (Extract, Transform, Load)** pipeline for a pharmaceutical manufacturing dataset. Raw CSV data is extracted and validated in Python, then loaded into a MySQL database as the system of record. From there, the data is transformed using SQL and pandas into analytics-ready datasets, which are then loaded into CSV outputs for reporting and validation.
 
 ---
 
