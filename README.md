@@ -6,7 +6,7 @@ This project implements an end-to-end **ETL (Extract, Transform, Load)** pipelin
 
 ## Installation Instructions (WIP)
    Include all steps required to install and set up the project (including dependencies, environment setup)
-   - Python version
+   - Python version 3.10 or above
 
    - Required libraries (pandas, mysql-connector-python, prefect, python-dotenv)
 
