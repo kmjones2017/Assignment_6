@@ -254,69 +254,85 @@ DELIMITER ;
 
 
 
-
-
-
-
-
 --  
 
+
+-- Data Aggregation
+
+-- 1. Total Quantity per Order
+SELECT 
+    order_id,
+    SUM(quantity) AS total_quantity
+FROM order_items
+GROUP BY order_id;
+
+
+
+-- Average quantity size for orders
+SELECT 
+    AVG(quantity) AS avg_quantity_per_item
+FROM order_items;
+
+
+-- Total quantity ordered
+SELECT 
+    SUM(quantity) AS avg_quantity_per_item
+FROM order_items;
+
+
+
+-- Average quantity size and price for each order
+SELECT 
+    AVG(quantity * unit_price) AS avg_quantity_per_item
+FROM order_items;
+
+
+
+-- Total spent by each customers
 SELECT 
     c.customer_id,
     c.name AS customer_name,
-    o.order_id,
-    o.order_date,
-    oi.order_item_id,
-    oi.quantity,
-    oi.unit_price,
-    db.batch_number,
-    db.manufacture_date,
-    d.drug_name,
-    d.dosage_form,
-    d.strength_mg
-FROM pharma_db.customers c
-JOIN pharma_db.orders o 
-    ON c.customer_id = o.customer_id
-JOIN pharma_db.order_items oi 
-    ON o.order_id = oi.order_id
-JOIN pharma_db.drug_batches db 
-    ON oi.batch_id = db.batch_id
-JOIN pharma_db.drugs d 
-    ON db.drug_id = d.drug_id
-ORDER BY c.customer_id, o.order_id, oi.order_item_id;
+    SUM(oi.quantity * oi.unit_price) AS total_spent
+FROM customers c -- c is abreviation for customer
+JOIN orders o ON c.customer_id = o.customer_id -- o is for order
+JOIN order_items oi ON o.order_id = oi.order_id -- oi is for order items
+GROUP BY c.customer_id, c.name;
 
--- Supplier
+
+
+-- Sum spent by customer type
+SELECT 
+    c.customer_type,
+    SUM(oi.quantity * oi.unit_price) AS total_spent
+FROM customers c -- c is abreviation for customer
+JOIN orders o ON c.customer_id = o.customer_id -- o is for order
+JOIN order_items oi ON o.order_id = oi.order_id -- oi is for order items
+GROUP BY c.customer_type;
+
+
+
+-- Total Recenue by Product
 
 SELECT 
-    c.customer_id,
-    c.name AS customer_name,
-    o.order_id,
-    o.order_date,
-    oi.order_item_id,
-    oi.quantity,
-    oi.unit_price,
-    db.batch_number,
+    d.drug_id,
     d.drug_name,
-    d.dosage_form,
-    d.strength_mg,
-    GROUP_CONCAT(CONCAT(rm.material_name, ' (', s.supplier_name, ', ', s.country, ')') 
-                 SEPARATOR '; ') AS materials_suppliers
-FROM pharma_db.customers c
-JOIN pharma_db.orders o 
-    ON c.customer_id = o.customer_id
-JOIN pharma_db.order_items oi 
-    ON o.order_id = oi.order_id
-JOIN pharma_db.drug_batches db 
-    ON oi.batch_id = db.batch_id
-JOIN pharma_db.drugs d 
-    ON db.drug_id = d.drug_id
-JOIN pharma_db.drug_formulations df 
-    ON d.drug_id = df.drug_id
-JOIN pharma_db.raw_materials rm 
-    ON df.material_id = rm.material_id
-JOIN pharma_db.suppliers s 
-    ON rm.supplier_id = s.supplier_id
-GROUP BY c.customer_id, c.name, o.order_id, o.order_date, 
-         oi.order_item_id, oi.quantity, oi.unit_price, 
-         db.batch_number, d.drug_name, d.dosage_form, d.strength_mg
-ORDER BY c.customer_id, o.order_id, oi.order_item_id;
+    SUM(oi.quantity * oi.unit_price) AS total_revenue
+FROM drugs d
+JOIN drug_batches db ON d.drug_id = db.drug_id
+JOIN order_items oi ON db.batch_id = oi.batch_id
+GROUP BY d.drug_id, d.drug_name
+ORDER BY total_revenue DESC;
+
+-- Top Selling Products by Quantity and Revenue
+
+SELECT 
+    d.drug_id,
+    d.drug_name,
+    SUM(oi.quantity) AS total_quantity_sold,
+    SUM(oi.quantity * oi.unit_price) AS total_revenue
+FROM drugs d
+JOIN drug_batches db ON d.drug_id = db.drug_id
+JOIN order_items oi ON db.batch_id = oi.batch_id
+GROUP BY d.drug_id, d.drug_name
+ORDER BY total_quantity_sold DESC, total_revenue DESC;
+
