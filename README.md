@@ -22,15 +22,61 @@ This project implements an end-to-end **ETL (Extract, Transform, Load)** pipelin
 
 **Data Flow Summary**
 
-```
-CSV Files
-   ↓
-MySQL Database (Normalized Schema)
-   ↓
-Python + pandas Transformations
-   ↓
-Analytics Outputs (CSV Reports)
-```
+# High-Level Pipeline Overview
+
+```text
+                        ┌────────────────────┐
+                        │  Raw CSV Files     │
+                        │  (customers, etc)  │
+                        └─────────┬──────────┘
+                                  │
+                                  ▼
+                        ┌────────────────────┐
+                        │  Load to MySQL     │
+                        │  (schema + data)   │
+                        └─────────┬──────────┘
+                                  │
+                                  ▼
+                    ┌──────────────────────────┐
+                    │        DATABASE          │
+                    │        (MySQL)           │
+                    └─────────┬────────────────┘
+                              │
+              ┌───────────────┴────────────────┐
+              │                                │
+              ▼                                ▼
+   ┌──────────────────────────┐   ┌──────────────────────────┐
+   │ SQL Fact / Analytics     │   │ Pandas Fact / Analytics  │
+   │ Dataset (JOINs)          │   │ Dataset (JOINs)          │
+   │ (orders_fact.sql)        │   │ build_orders_fact()      │
+   └─────────┬────────────────┘   └─────────┬────────────────┘
+             │                                │
+             ▼                                ▼
+   ┌──────────────────────────┐   ┌──────────────────────────┐
+   │ SQL Aggregations          │   │ Pandas Aggregations       │
+   │ (GROUP BY, SUM, etc.)     │   │ (groupby, agg)            │
+   └─────────┬────────────────┘   └─────────┬────────────────┘
+             │                                │
+             └──────────────┬────────────────┘
+                            ▼
+                ┌──────────────────────────┐
+                │   Validation Task        │
+                │ Compare SQL vs Pandas    │
+                │ Aggregates               │
+                └─────────┬────────────────┘
+                          │
+                          ▼
+                ┌──────────────────────────┐
+                │   Persist SQL Results    │
+                │   (CSV / artifact)       │
+                └─────────┬────────────────┘
+                          │
+                          ▼
+                ┌──────────────────────────┐
+                │   Final Output / Report  │
+                │   (trusted metrics)     │
+                └──────────────────────────┘
+
 
 ### Technologies Used
 
