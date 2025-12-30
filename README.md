@@ -12,7 +12,7 @@ This project implements an end-to-end **ETL (Extract, Transform, Load)** pipelin
 
    - MySQL setup
 
-   * Following the `.env.example` file's template, create a file titled `.env` (using Notepad) on the local machine that will be running the code. After that, replace the values for the username and password with the local machine's MySQL credentials. Place the new .env file in the root folder of the downloaded code repository. If successful, the code will reference said file when accessing the MySQL database throughout the pipeline.
+   * Following the `.env.example` file's template, create a file titled `.env` (using Notepad) on the local machine that will be running the code. Next, replace the values for the username and password with the local machine's MySQL credentials. Then, place the new .env file in the root folder of the downloaded code repository. If successful, the code will reference said file when accessing the MySQL database throughout the pipeline.
 
    - Optional Prefect setup
 
