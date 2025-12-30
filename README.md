@@ -20,8 +20,6 @@ This project implements an end-to-end **ETL (Extract, Transform, Load)** pipelin
 
 ## Architecture Overview
 
-**Data Flow Summary**
-
 ### High-Level Pipeline Overview
 
 ```text
