@@ -4,12 +4,14 @@ import os
 import pandas as pd
 import mysql.connector
 from dotenv import load_dotenv
+from prefect import task, flow
 
 load_dotenv()
 
 # -------------------------
 # Database connection
 # -------------------------
+@task
 def get_connection():
     return mysql.connector.connect(
         host=os.getenv("DB_HOST"),
@@ -21,6 +23,7 @@ def get_connection():
 # -------------------------
 # Table loader
 # -------------------------
+@task
 def load_table(table_name: str) -> pd.DataFrame:
     conn = get_connection()
     df = pd.read_sql(f"SELECT * FROM {table_name}", conn)
@@ -30,6 +33,7 @@ def load_table(table_name: str) -> pd.DataFrame:
 # -------------------------
 # Minimal schema validation
 # -------------------------
+@task
 def validate_columns(df: pd.DataFrame, required_cols: list[str], table_name: str):
     missing = set(required_cols) - set(df.columns)
     if missing:
@@ -38,6 +42,7 @@ def validate_columns(df: pd.DataFrame, required_cols: list[str], table_name: str
 # -------------------------
 # Core transformation
 # -------------------------
+@flow
 def build_orders_fact() -> pd.DataFrame:
     """
     Builds a business-ready fact table by joining customers, orders,
