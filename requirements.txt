@@ -1,0 +1,5 @@
+prefect>=3.0
+pandas
+numpy
+mysql-connector-python
+python-dotenv

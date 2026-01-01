@@ -80,7 +80,7 @@ def _build_insert_sql(table: str, columns: list[str]) -> str:
     """
 
 
-@task
+@task(retries=2, retry_delay_seconds=10)
 def load_all_csv_data(batch_size: int = 1000):
     """
     Loads all CSV files into MySQL using parameterized batch inserts.
