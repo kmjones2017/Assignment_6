@@ -27,14 +27,8 @@ This section walks you through getting the pipeline running locally with minimal
 ### 2. Clone the Repository
 
 ```bash
-git clone https://github.com/<your-org>/Assignment_6.git
+git clone --branch pipeline_flow_local_test https://github.com/kmjones2017/Assignment_6.git
 cd Assignment_6
-```
-
-If you are using a specific branch (e.g. for testing or presentation):
-
-```bash
-git checkout pipeline_flow_local_test
 ```
 
 ---
@@ -298,7 +292,9 @@ Alternative approaches (single-engine analytics, no orchestration, or direct CSV
 * Scheduling is intentionally omitted in this implementation and can be added later using Prefect schedules or deployments.
 * Validation tasks focus on correctness checks rather than rich reporting; enhanced logging or persisted validation artifacts would improve observability.
 
-## What I’d Improve With More Time
+---
+
+## Possible Improvements With More Time
 
 This section captures reflective improvements beyond the scope of the project timeline:
 
