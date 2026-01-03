@@ -109,7 +109,7 @@ python -m flows.master_flow
 
 ## Architecture Overview
 
-### Accurate Pipeline Diagram (Based on Code)
+### Pipeline Diagram
 
 ```text
 ┌──────────────────────────┐
