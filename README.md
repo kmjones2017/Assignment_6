@@ -267,7 +267,7 @@ Assignment_6/
 │       └── orders_aggregates_result_4.csv
 │
 ├── db/                               # SQL scripts for schema, ingestion, and aggregations
-│   ├── load_data.sql                 # Loads raw CSV data into MySQL
+│   ├── load_data.sql                 # Loads raw CSV data into MySQL (template file for debugging)
 │   ├── orders_fact.sql               # Creates fact table in SQL
 │   ├── orders_aggregates.sql         # Aggregation queries persisted as CSV
 │   ├── pharma_schema.sql             # Creates database and tables
